@@ -1,7 +1,14 @@
 class Player {
-   constructor(x, y) {
+   constructor(x = 0, y = 0) {
       this.x = x;
       this.y = y;
+   }
+
+   setRandomPosition(levelWidth, levelHeight) {
+      const posX = Math.floor(Math.random() * levelWidth);
+      const posY = Math.floor(Math.random() * levelHeight);
+      this.x = posX;
+      this.y = posY;
    }
 
    setLocation(direction) {
@@ -16,4 +23,4 @@ class Player {
    }
 }
 
-module.exports = {Player};
+module.exports = { Player };

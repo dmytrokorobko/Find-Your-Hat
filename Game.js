@@ -1,22 +1,26 @@
 class Game {
-   constructor(level, player) {
+   constructor(level, player, hat = '^', hole = 'O', pathCharacter = '*') {
       this.level = level;
       this.player = player;
+      this.hat = hat;
+      this.hole = hole;
+      this.pathCharacter = pathCharacter;        
+      this.updatePlayerLocationOnMap();    
    }
 
-   playerMove(hat, hole) {
+   playerMove() {
       //check borders
       if (this.player.getLocation().y >= 0 && this.player.getLocation().y < this.level.getLevel().length && 
                            this.player.getLocation().x >= 0 && this.player.getLocation().x < this.level.getLevel()[0].length) {
-         if (this.level.getLevel()[this.player.y][this.player.x] === hole) return 'hole';
+         if (this.level.getLevel()[this.player.y][this.player.x] === this.hole) return 'hole';
          else {
-            if (this.level.getLevel()[this.player.y][this.player.x] === hat) return 'win';
+            if (this.level.getLevel()[this.player.y][this.player.x] === this.hat) return 'win';
             else return 'continue';
          }
       } else return 'borders';
    }
 
-   isGameContionue(playerPosition, pathCharacter) {
+   isGameContionue(playerPosition) {
       if (playerPosition === 'win') {
          console.log('You have won!!!');
          return false;
@@ -28,10 +32,14 @@ class Game {
       } 
       else {
          //draw player's move
-         this.level.updateLevel(this.player.getLocation().x, this.player.getLocation().y, pathCharacter);
+         this.updatePlayerLocationOnMap();
          return true;
       } 
    }
+
+   updatePlayerLocationOnMap() {
+      this.level.updateLevel(this.player.getLocation().x, this.player.getLocation().y, this.pathCharacter);
+   }
 }
 
-module.exports = {Game};
+module.exports = { Game };
