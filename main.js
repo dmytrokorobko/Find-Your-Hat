@@ -22,6 +22,7 @@ const game = new Game(myField, player);
 //Play game
 let play = true;
 while(play) {
+   process.stdout.write('\x1Bc'); // Clear terminal window
    myField.print();
    const move = prompt('Where to move? u - up, d - down, l - left, r - right: ');
    if (move === 'q') {
